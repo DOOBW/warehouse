@@ -42,7 +42,6 @@ while true do
   local i = io.read()
   if i == 'getpass' then
     modem.broadcast(port, CURRENT_USER..'@'..i)
-    print(CURRENT_USER..'@'..i)
   elseif i == 'key' then
     term.write('key> ')
     CURRENT_KEY = term.read(_,_,_,'*'):sub(1,-2)
@@ -62,8 +61,12 @@ while true do
           end
         end
         local tbl = ser.unserialize(data.inflate(crypt(CURRENT_KEY, msg)))
-        for i, j in pairs(tbl) do
-          print('['..i..'] '..j)
+        for a, b in pairs(tbl) do
+          if i == 'list' and tonumber(b) > 0 then
+            print('['..a..'] '..b)
+          elseif i == 'cells' then
+            print(b)
+          end
         end
       end
     end
