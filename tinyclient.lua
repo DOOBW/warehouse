@@ -33,7 +33,7 @@ local function crypt(pswd, text, o)
   end
 end
 
-local CURRENT_USER = ({event.pull('key_down')})[5]
+local CURRENT_USER = ({event.pull('key_up')})[5]
 local CURRENT_KEY = ''
 print(CURRENT_USER)
 modem.open(port)
